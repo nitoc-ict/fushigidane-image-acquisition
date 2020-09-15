@@ -1,20 +1,28 @@
 import get_image
+import os
 
-C_1 = float(input("Coordinate1 >>"))
-#緯度
-C_2 = float(input("Coordinate2 >>"))
-#経度
+coord = input("Coordinate >>")
+coord = coord.split(',')
+lat = float(coord[0])
+long = float(coord[1])
 
-url_N = get_image.make_one_url(C_1, C_2, 0)
+
+url_N = get_image.make_one_url(lat, long, 0)
 #North
-url_S = get_image.make_one_url(C_1, C_2, 180)
+url_S = get_image.make_one_url(lat, long, 180)
 #South
-url_W = get_image.make_one_url(C_1, C_2, 270)
+url_W = get_image.make_one_url(lat, long, 270)
 #West
-url_E = get_image.make_one_url(C_1, C_2, 90)
+url_E = get_image.make_one_url(lat, long, 90)
 #East
 
 try:
+    new_dir = str(lat)+","+str(long)
+    try:
+        os.mkdir(new_dir)
+    except OSError:
+        print('already exists')
+    os.chdir(new_dir)
     image_N = get_image.download_image(url_N)
     get_image.save_image("North.png", image_N)
     image_S = get_image.download_image(url_S)
