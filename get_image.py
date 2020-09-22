@@ -6,9 +6,9 @@ imshime.api_create()
 
 def make_one_url(lon, lat, heading):
     api_key = os.getenv('API_KEY')
-    url_str = r"https://maps.googleapis.com/maps/api/streetview?size=600x300"
+    url_str = r"https://maps.googleapis.com/maps/api/streetview?size=500x300"
     url_str += r"&location=" + str(lon) + r"," + str(lat)
-    url_str += r"&heading="+ str(heading)
+    url_str += r"&heading="+ str(heading) + "&fov=120"
     #以下のオプションをつけたほうが望ましいと考えられる
     url_str += r"&key=" + str(api_key)
     return url_str
